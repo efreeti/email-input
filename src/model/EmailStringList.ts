@@ -2,7 +2,7 @@ import {Observable} from "./Observable";
 import {EmailString} from "./EmailString";
 
 export class EmailStringList extends Observable {
-	constructor(private emails: Array<EmailString> = []) {
+	constructor(private emails: Array<EmailString>) {
 		super();
 	}
 
