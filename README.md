@@ -133,3 +133,6 @@ npm run watch
 There's a **default** sample built based on the requirements provided - a form with input and two buttons. The sample
 HTML is generated using html-webpack-plugin and is inside **dist** folder after performing the build or watch task under
 the name of **default-sample.html**. The sources (TS, SCSS and EJS template files) are located in **/samples/default**.
+
+Links:
+ * [Default sample](dist/default-sample.html)
