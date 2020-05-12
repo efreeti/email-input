@@ -1,0 +1,27 @@
+{
+  "name": "@efreeti/email-input",
+  "version": "1.0.0",
+  "description": "Email input component",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest -c jest.config.js",
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "watch": "NODE_ENV=development webpack --config webpack.config.js -w"
+  },
+  "author": "Bohdan Tsymbala",
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "awesome-typescript-loader": "^5.2.1",
+    "css-loader": "^3.5.3",
+    "jest": "^24.9.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.0",
+    "sass-loader": "^8.0.2",
+    "ts-jest": "^25.5.1",
+    "ts-node": "^8.10.1",
+    "tslint": "^6.1.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
