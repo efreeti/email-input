@@ -84,6 +84,8 @@ export class EmailsInputView extends View<EmailStringList> {
 	private handleDropEvent(event: DragEvent) {
 		this.addEmailsFromString(event.dataTransfer.getData("text/plain"), false);
 		this.scrollToBottom();
+
+		event.preventDefault();
 	}
 
 	private handleClickEvent() {
