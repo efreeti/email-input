@@ -1,5 +1,5 @@
-export interface ElementCreationOptions {
-	name: string;
+export interface ElementCreationOptions<K extends keyof HTMLElementTagNameMap> {
+	name: K;
 	classes?: Array<string>;
 	role?: string;
 	text?: string;
@@ -9,7 +9,7 @@ export interface ElementCreationOptions {
 	}
 }
 
-export function element(ownerDocument: Document, options: ElementCreationOptions) {
+export function element<K extends keyof HTMLElementTagNameMap>(ownerDocument: Document, options: ElementCreationOptions<K>) {
 	const element = ownerDocument.createElement(options.name);
 	element.className = options.classes ? options.classes.join(' ') : '';
 	element.textContent = options.text || '';

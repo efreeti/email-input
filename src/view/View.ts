@@ -9,7 +9,7 @@ export abstract class View<T extends Observable> implements Observer {
 
 	}
 
-	element(options: ElementCreationOptions) {
+	element<K extends keyof HTMLElementTagNameMap>(options: ElementCreationOptions<K>) {
 		return element(this.ownerDocument, options);
 	}
 
