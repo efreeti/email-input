@@ -40,6 +40,7 @@ module.exports = {
 			chunkFilename: '[id].css',
 		}),
 		new HtmlWebpackPlugin({
+			filename: "default-sample.html",
 			template: 'samples/default/index.ejs',
 			chunks: ['default-sample']
 		}),
