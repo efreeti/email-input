@@ -4,14 +4,14 @@ import {EmailStringList} from "./model/EmailStringList";
 import {EmailsInputView} from "./view/EmailsInputView";
 
 interface EmailsInputOptions {
-	emails?: Array<string>;
-	onChange?: (emails: Array<string>) => void
+	emails?: string[];
+	onChange?: (emails: string[]) => void
 }
 
 export class EmailsInput implements Observer {
 	private emailsList: EmailStringList;
 	private emailInputView: EmailsInputView;
-	private onEmailsListChange?: (emails: Array<string>) => void;
+	private onEmailsListChange?: (emails: string[]) => void;
 
 	constructor(private root: HTMLElement, options?: EmailsInputOptions) {
 		this.emailsList = new EmailStringList((options && options.emails || []).map(
@@ -27,7 +27,7 @@ export class EmailsInput implements Observer {
 		return this.emailsList.getEmails().map(email => email.value);
 	}
 
-	setEmails(emails: Array<string>) {
+	setEmails(emails: string[]) {
 		this.emailsList.setEmails(emails.map(email => new EmailString(email)));
 	}
 

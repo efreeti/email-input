@@ -1,7 +1,7 @@
 import {Observer} from "./Observer";
 
 export class Observable {
-	private observers: Array<Observer> = [];
+	private observers: Observer[] = [];
 
 	addObserver(observer: Observer) {
 		this.observers.push(observer);

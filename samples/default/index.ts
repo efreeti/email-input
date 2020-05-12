@@ -16,7 +16,7 @@ const sampleNames = ['bob', 'rob', 'john', 'steve', 'jane', 'anna'];
 const sampleSubdomains = ['apple', 'facebook', 'google', 'linkedin'];
 const sampleRootDomains = ['com', 'org', 'net', 'nl', 'ru', 'ua'];
 
-function pickRandom(list: Array<string>) {
+function pickRandom(list: string[]) {
   return list[Math.round(Math.random() * (list.length - 1))];
 }
 

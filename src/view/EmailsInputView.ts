@@ -29,14 +29,14 @@ export class EmailsInputView extends View<EmailStringList> {
 		}
 	}
 
-	private addEmailsFromString(string: string, resetInput: boolean) {
-		const emails = EmailString.parseEmailStringsFromString(string);
+	private addEmailsFromString(emailsString: string, resetInput: boolean) {
+		const emails = EmailString.parseEmailStringsFromString(emailsString);
 
 		if (emails.length > 0) {
 			this.getModel().addEmails(emails);
 
 			if (resetInput) {
-				this.input.value = this.input.value.substr(string.length).replace(/^\s+/, '');
+				this.input.value = this.input.value.substr(emailsString.length).replace(/^\s+/, '');
 				this.input.setSelectionRange(0, 0);
 
 				this.updateInputWidth();
