@@ -1,4 +1,4 @@
-import {EmailsInput} from '../src';
+import {EmailsInput} from '../src/EmailsInput';
 
 function createContainer() {
 	const div = document.createElement('div');
