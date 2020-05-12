@@ -15,7 +15,7 @@ export class EmailsInputView extends View<EmailStringList> {
 		this.emailStringListView = new EmailStringListView(ownerDocument, model);
 	}
 
-	private scrollToBottom() {
+	scrollToBottom() {
 		this.html.scrollTop = this.html.scrollHeight;
 	}
 
