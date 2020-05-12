@@ -1,4 +1,4 @@
-import {EmailString} from "../../src/model/EmailString";
+import {EmailString} from '../../src/model/EmailString';
 
 describe('EmailString', () => {
 	describe('EmailString::parseEmailStringsFromString', () => {

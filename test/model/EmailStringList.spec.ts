@@ -1,5 +1,5 @@
-import {EmailString} from "../../src/model/EmailString";
-import {EmailStringList} from "../../src/model/EmailStringList";
+import {EmailString} from '../../src/model/EmailString';
+import {EmailStringList} from '../../src/model/EmailStringList';
 
 const bohdan = new EmailString('bohdan@tsymbala.com');
 const bob = new EmailString('bob@bol.com');

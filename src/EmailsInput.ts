@@ -1,7 +1,7 @@
-import {Observer} from "./model/Observer";
-import {EmailString} from "./model/EmailString";
-import {EmailStringList} from "./model/EmailStringList";
-import {EmailsInputView} from "./view/EmailsInputView";
+import {Observer} from './model/Observer';
+import {EmailString} from './model/EmailString';
+import {EmailStringList} from './model/EmailStringList';
+import {EmailsInputView} from './view/EmailsInputView';
 
 interface EmailsInputOptions {
 	emails?: string[];

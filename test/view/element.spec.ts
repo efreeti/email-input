@@ -1,4 +1,4 @@
-import {element} from "../../src/view/element";
+import {element} from '../../src/view/element';
 
 describe('element', () => {
 	it('should create right element with text', () => {

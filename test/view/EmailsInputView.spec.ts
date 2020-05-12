@@ -1,6 +1,6 @@
-import {EmailString} from "../../src/model/EmailString";
-import {EmailStringList} from "../../src/model/EmailStringList";
-import {EmailsInputView} from "../../src/view/EmailsInputView";
+import {EmailString} from '../../src/model/EmailString';
+import {EmailStringList} from '../../src/model/EmailStringList';
+import {EmailsInputView} from '../../src/view/EmailsInputView';
 
 const bohdan = new EmailString('bohdan@tsymbala.com');
 const invalid = new EmailString('invalid.com');

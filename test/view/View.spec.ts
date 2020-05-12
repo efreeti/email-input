@@ -1,5 +1,5 @@
-import {View} from "../../src/view/View";
-import {Observable} from "../../src/model/Observable";
+import {View} from '../../src/view/View';
+import {Observable} from '../../src/model/Observable';
 
 class TestModel extends Observable {
 	constructor(private value: string) {
