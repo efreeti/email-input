@@ -9,6 +9,7 @@ module.exports = {
 	devtool: 'inline-source-map',
 	entry: {
 		'index': join(__dirname, 'src/index.ts'),
+		'default-sample': join(__dirname, 'samples/default/index.ts'),
 	},
 	output: {
 		path: join(__dirname, 'dist'),
@@ -36,6 +37,10 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name].css',
 			chunkFilename: '[id].css',
+		}),
+		new HtmlWebpackPlugin({
+			template: 'samples/default/index.ejs',
+			chunks: ['default-sample']
 		}),
 	],
 	resolve: {
