@@ -1,6 +1,6 @@
-import {Observable} from '../model/Observable';
-import {Observer} from '../model/Observer';
-import {element, ElementCreationOptions} from './element';
+import {Observable} from '@/model/Observable';
+import {Observer} from '@/model/Observer';
+import {element, ElementCreationOptions} from '@/view/element';
 
 export abstract class View<T extends Observable> implements Observer {
 	public html: HTMLElement;

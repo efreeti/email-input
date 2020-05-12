@@ -1,4 +1,4 @@
-import {EmailsInput} from '../../src';
+import {EmailsInput} from '@/EmailsInput';
 import './index.scss';
 
 const emailsCountLabel = document.getElementById('emails-count');

@@ -1,4 +1,5 @@
 const {CheckerPlugin} = require('awesome-typescript-loader');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {optimize} = require('webpack');
@@ -44,6 +45,7 @@ module.exports = {
 		}),
 	],
 	resolve: {
+		plugins: [new TsconfigPathsPlugin()],
 		extensions: ['.ts', '.js'],
 	},
 };

@@ -1,4 +1,4 @@
-import {Observable} from '../../src/model/Observable';
+import {Observable} from '@/model/Observable';
 
 describe('Observable', () => {
 	describe('Observable::hasObserver', () => {

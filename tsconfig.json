@@ -1,11 +1,15 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
+		"baseUrl": ".",
 		"target": "es5",
 		"module": "commonjs",
 		"sourceMap": false,
 		"typeRoots": ["node_modules/@types"],
 		"moduleResolution": "node",
+		"paths": {
+			"@/*": ["src/*"]
+		},
 		"lib": ["es2017", "dom"]
 	},
 	"include": [

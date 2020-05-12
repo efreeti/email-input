@@ -1,4 +1,4 @@
-import {Observer} from './Observer';
+import {Observer} from '@/model/Observer';
 
 export class Observable {
 	private observers: Observer[] = [];

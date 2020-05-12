@@ -1,7 +1,7 @@
-import {View} from './View';
-import {EmailString} from '../model/EmailString';
-import {EmailStringList} from '../model/EmailStringList';
-import './EmailStringListView.scss';
+import {View} from '@/view/View';
+import {EmailString} from '@/model/EmailString';
+import {EmailStringList} from '@/model/EmailStringList';
+import '@/view/EmailStringListView.scss';
 
 export class EmailStringListView extends View<EmailStringList> {
 	constructor(ownerDocument: Document, emails: EmailStringList) {

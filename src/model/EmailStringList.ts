@@ -1,5 +1,5 @@
-import {Observable} from './Observable';
-import {EmailString} from './EmailString';
+import {Observable} from '@/model/Observable';
+import {EmailString} from '@/model/EmailString';
 
 export class EmailStringList extends Observable {
 	constructor(private emails: EmailString[]) {

@@ -1,1 +1,1 @@
-export {EmailsInput} from './EmailsInput';
+export {EmailsInput} from '@/EmailsInput';

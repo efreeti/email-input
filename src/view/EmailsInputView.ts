@@ -1,8 +1,8 @@
-import {View} from './View';
-import {EmailString} from '../model/EmailString';
-import {EmailStringList} from '../model/EmailStringList';
-import {EmailStringListView} from './EmailStringListView';
-import './EmailsInputView.scss';
+import {View} from '@/view/View';
+import {EmailString} from '@/model/EmailString';
+import {EmailStringList} from '@/model/EmailStringList';
+import {EmailStringListView} from '@/view/EmailStringListView';
+import '@/view/EmailsInputView.scss';
 
 export class EmailsInputView extends View<EmailStringList> {
 	private emailStringListView: EmailStringListView;
