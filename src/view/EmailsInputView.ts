@@ -15,7 +15,11 @@ export class EmailsInputView extends View<EmailStringList> {
 		this.emailStringListView = new EmailStringListView(ownerDocument, model);
 	}
 
-	updateInputWidth() {
+	private scrollToBottom() {
+		this.html.scrollTop = this.html.scrollHeight;
+	}
+
+	private updateInputWidth() {
 		if (this.input.value) {
 			if (this.input.scrollWidth > this.input.offsetWidth) {
 				this.input.style.width = this.input.scrollWidth + 'px';
@@ -25,7 +29,7 @@ export class EmailsInputView extends View<EmailStringList> {
 		}
 	}
 
-	addEmailsFromString(string: string, resetInput: boolean) {
+	private addEmailsFromString(string: string, resetInput: boolean) {
 		const emails = EmailString.parseEmailStringsFromString(string);
 
 		if (emails.length > 0) {
@@ -46,6 +50,7 @@ export class EmailsInputView extends View<EmailStringList> {
 
 	private handleInputPasteEvent(event: ClipboardEvent) {
 		this.addEmailsFromString(event.clipboardData.getData('text/plain'), false);
+		this.scrollToBottom();
 
 		event.preventDefault();
 	}
@@ -78,6 +83,7 @@ export class EmailsInputView extends View<EmailStringList> {
 
 	private handleDropEvent(event: DragEvent) {
 		this.addEmailsFromString(event.dataTransfer.getData("text/plain"), false);
+		this.scrollToBottom();
 	}
 
 	private handleClickEvent() {
