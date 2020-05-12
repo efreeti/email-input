@@ -96,12 +96,12 @@ describe('EmailsInputView', () => {
 			const view = new EmailsInputView(document, emailStringList).create();
 
 			let input = view.html.querySelector('input');
-			input.value = ' \t john@doe.com \n,\n\t jane@doe.com  ';
+			input.value = ' \t john@doe.com \n,\n\t jane@doe.com	';
 			input.dispatchEvent(new KeyboardEvent('keyup', {
 				key: ','
 			}));
 
-			expect(input.value).toBe('jane@doe.com  ');
+			expect(input.value).toBe('jane@doe.com	');
 			expect(emailStringList.getEmails().length).toBe(2);
 			expect(emailStringList.getEmails()[0].value).toBe('bohdan@tsymbala.com');
 			expect(emailStringList.getEmails()[1].value).toBe('john@doe.com');
@@ -112,12 +112,12 @@ describe('EmailsInputView', () => {
 			const view = new EmailsInputView(document, emailStringList).create();
 
 			let input = view.html.querySelector('input');
-			input.value = ' \t invalid.com  ';
+			input.value = ' \t invalid.com	';
 			const event = new Event('paste');
 			(<any> event).clipboardData = {
 				getData: type => {
 					if (type === 'text/plain') {
-						return ' \t john@doe.com \n,\n\t jane@doe.com  ';
+						return ' \t john@doe.com \n,\n\t jane@doe.com	';
 					} else {
 						return null;
 					}
@@ -125,7 +125,7 @@ describe('EmailsInputView', () => {
 			};
 			input.dispatchEvent(event);
 
-			expect(input.value).toBe(' \t invalid.com  ');
+			expect(input.value).toBe(' \t invalid.com	');
 			expect(emailStringList.getEmails().length).toBe(3);
 			expect(emailStringList.getEmails()[0].value).toBe('bohdan@tsymbala.com');
 			expect(emailStringList.getEmails()[1].value).toBe('john@doe.com');
@@ -137,12 +137,12 @@ describe('EmailsInputView', () => {
 			const view = new EmailsInputView(document, emailStringList).create();
 
 			let input = view.html.querySelector('input');
-			input.value = ' \t invalid.com  ';
+			input.value = ' \t invalid.com	';
 			const event = new Event('drop');
 			(<any> event).dataTransfer = {
 				getData: type => {
 					if (type === 'text/plain') {
-						return ' \t john@doe.com \n,\n\t jane@doe.com  ';
+						return ' \t john@doe.com \n,\n\t jane@doe.com	';
 					} else {
 						return null;
 					}
@@ -150,7 +150,7 @@ describe('EmailsInputView', () => {
 			};
 			view.html.dispatchEvent(event);
 
-			expect(input.value).toBe(' \t invalid.com  ');
+			expect(input.value).toBe(' \t invalid.com	');
 			expect(emailStringList.getEmails().length).toBe(3);
 			expect(emailStringList.getEmails()[0].value).toBe('bohdan@tsymbala.com');
 			expect(emailStringList.getEmails()[1].value).toBe('john@doe.com');

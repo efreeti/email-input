@@ -17,15 +17,15 @@ const sampleSubdomains = ['apple', 'facebook', 'google', 'linkedin'];
 const sampleRootDomains = ['com', 'org', 'net', 'nl', 'ru', 'ua'];
 
 function pickRandom(list: string[]) {
-  return list[Math.round(Math.random() * (list.length - 1))];
+	return list[Math.round(Math.random() * (list.length - 1))];
 }
 
 document.getElementById('add-email').addEventListener('click', () => {
-  emailsInput.addEmail(
+	emailsInput.addEmail(
 		`${pickRandom(sampleNames)}@${pickRandom(sampleSubdomains)}.${pickRandom(sampleRootDomains)}`
 	);
-  emailsInput.scrollToBottom();
+	emailsInput.scrollToBottom();
 });
 document.getElementById('get-emails-count').addEventListener('click', () => {
-  alert(`${emailsInput.getEmails().length} emails entered!`);
+	alert(`${emailsInput.getEmails().length} emails entered!`);
 });

@@ -3,7 +3,7 @@ import {EmailString} from "../../src/model/EmailString";
 describe('EmailString', () => {
 	describe('EmailString::parseEmailStringsFromString', () => {
 		it('should return empty list when blank string', () => {
-			expect(EmailString.parseEmailStringsFromString(' \n\t    ')).toEqual([]);
+			expect(EmailString.parseEmailStringsFromString(' \n\t		')).toEqual([]);
 		});
 
 		it('should return correct list when single email string', () => {
