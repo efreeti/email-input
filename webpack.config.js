@@ -1,6 +1,6 @@
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin/typings');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { optimize } = require('webpack');
 const { join } = require('path');
 
