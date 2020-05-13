@@ -25,7 +25,8 @@ export class EmailsInputView extends View<EmailStringList> {
 
 		if (this.input.value) {
 			if (this.getOwnerDocument().isInputScrollWidthSupported()) {
-				this.input.style.width = this.input.scrollWidth + 'px';
+				// A magic number is used as a last resort to solve some tiny rounding error in scrollWidth in Chrome
+				this.input.style.width = (this.input.scrollWidth + 1) + 'px';
 			} else {
 				this.inputSizer.textContent = this.input.value;
 				this.input.style.width = this.inputSizer.scrollWidth + 'px';
