@@ -13,7 +13,9 @@ out there would provide ready made and more solid abstractions for separating th
 One of the known missing features is input placeholder text, which slipped out of the view when checking designs and 
 is not mentioned in the requirements. I noticed it only last moment and unfortunately just using *placeholder* attribute 
 on the input is not enough to make this work given current auto-expanding input, and would require rework of layout 
-strategy last minute so was omitted.
+strategy last minute so was omitted. It would also be challenging to define proper behavior of such placeholder, the 
+case in the design is only one optimistic layout and it's not clear how to approach placeholder layout in cases of very
+limited space available for input.
 
 Another place where I allow my self deviation is approach to rendering and updates of markup. Though the requirements
 mention not to re-render all emails on adding or removing email, I decided to still go with that approach with following
