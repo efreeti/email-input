@@ -8,7 +8,7 @@ function getClipboardData(event: ClipboardEvent) {
 	if (event.clipboardData) {
 		return event.clipboardData.getData('text/plain');
 	} else {
-		return (<any>window).clipboardData.getData('Text');
+		return (window as any).clipboardData.getData('Text');
 	}
 }
 
