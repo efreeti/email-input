@@ -4,6 +4,23 @@ import {EmailStringList} from '@/model/EmailStringList';
 import {EmailStringListView} from '@/view/EmailStringListView';
 import '@/view/EmailsInputView.scss';
 
+function getClipboardData(event: ClipboardEvent) {
+	if (event.clipboardData) {
+		return event.clipboardData.getData('text/plain');
+	} else {
+		return (<any>window).clipboardData.getData('Text');
+	}
+}
+
+function getDropData(event: DragEvent) {
+	try {
+		return event.dataTransfer.getData('Text') || event.dataTransfer.getData('text/plain');
+	} catch (error) {
+		// IE can throw exception for 'text/plain' according to stack overflow
+		return '';
+	}
+}
+
 export class EmailsInputView extends View<EmailStringList> {
 	private emailStringListView: EmailStringListView;
 	private input: HTMLInputElement;
@@ -49,7 +66,7 @@ export class EmailsInputView extends View<EmailStringList> {
 	}
 
 	private handleInputPasteEvent(event: ClipboardEvent) {
-		this.addEmailsFromString(event.clipboardData.getData('text/plain'), false);
+		this.addEmailsFromString(getClipboardData(event), false);
 		this.scrollToBottom();
 
 		event.preventDefault();
@@ -76,13 +93,11 @@ export class EmailsInputView extends View<EmailStringList> {
 	}
 
 	private handleDragEvent(event: DragEvent) {
-		if (event.dataTransfer.types.includes('text/plain')) {
-			event.preventDefault();
-		}
+		event.preventDefault();
 	}
 
 	private handleDropEvent(event: DragEvent) {
-		this.addEmailsFromString(event.dataTransfer.getData("text/plain"), false);
+		this.addEmailsFromString(getDropData(event), false);
 		this.scrollToBottom();
 
 		event.preventDefault();
