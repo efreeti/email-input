@@ -1,5 +1,6 @@
 import {View} from '@/view/View';
 import {Observable} from '@/model/Observable';
+import {ViewDocument} from '@/view/ViewDocument';
 
 class TestModel extends Observable {
 	constructor(private value: string) {
@@ -17,12 +18,12 @@ class TestModel extends Observable {
 }
 
 class TestView extends View<TestModel> {
-	constructor(ownerDocument: Document, model: TestModel) {
+	constructor(ownerDocument: ViewDocument, model: TestModel) {
 		super(ownerDocument, model);
 	}
 
 	protected createHtml(): HTMLElement {
-		return this.element({
+		return this.createElement({
 			name: 'div',
 			classes: ['class-1']
 		});
@@ -40,7 +41,7 @@ class TestView extends View<TestModel> {
 describe('View', () => {
 	describe('View::create', () => {
 		it('should create view properly', () => {
-			const view = new TestView(document, new TestModel('value 1')).create();
+			const view = new TestView(new ViewDocument(document), new TestModel('value 1')).create();
 
 			expect(view.html.localName).toBe('div');
 			expect(view.html.textContent).toBe('value 1');
@@ -50,7 +51,7 @@ describe('View', () => {
 	describe('View::update', () => {
 		it('should update view properly', () => {
 			const model = new TestModel('value 1');
-			const view = new TestView(document, model).create();
+			const view = new TestView(new ViewDocument(document), model).create();
 
 			model.setValue('value 2');
 

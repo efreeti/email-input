@@ -1,6 +1,7 @@
 import {Observer} from '@/model/Observer';
 import {EmailString} from '@/model/EmailString';
 import {EmailStringList} from '@/model/EmailStringList';
+import {ViewDocument} from "@/view/ViewDocument";
 import {EmailsInputView} from '@/view/EmailsInputView';
 
 interface EmailsInputOptions {
@@ -18,7 +19,7 @@ export class EmailsInput implements Observer {
 			email => new EmailString(email)
 		));
 		this.emailInputView = new EmailsInputView(
-			root.ownerDocument, this.emailsList
+			new ViewDocument(root.ownerDocument), this.emailsList
 		);
 		this.onEmailsListChange = options && options.onChange;
 	}

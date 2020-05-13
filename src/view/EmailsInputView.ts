@@ -1,35 +1,16 @@
-import {detectInputScrollWidthSupport} from "@/view/support";
 import {View} from '@/view/View';
+import {ViewDocument} from "@/view/ViewDocument";
 import {EmailString} from '@/model/EmailString';
 import {EmailStringList} from '@/model/EmailStringList';
 import {EmailStringListView} from '@/view/EmailStringListView';
 import '@/view/EmailsInputView.scss';
 
-const inputScrollWidthSupported = detectInputScrollWidthSupport(document);
-
-function getClipboardData(event: ClipboardEvent) {
-	if (event.clipboardData) {
-		return event.clipboardData.getData('text/plain');
-	} else {
-		return (window as any).clipboardData.getData('Text');
-	}
-}
-
-function getDropData(event: DragEvent) {
-	try {
-		return event.dataTransfer.getData('Text') || event.dataTransfer.getData('text/plain');
-	} catch (error) {
-		// IE can throw exception for 'text/plain' according to stack overflow
-		return '';
-	}
-}
-
 export class EmailsInputView extends View<EmailStringList> {
 	private emailStringListView: EmailStringListView;
 	private input: HTMLInputElement;
+	private inputSizer: HTMLElement;
 
-
-	constructor(ownerDocument: Document, model: EmailStringList) {
+	constructor(ownerDocument: ViewDocument, model: EmailStringList) {
 		super(ownerDocument, model);
 
 		this.emailStringListView = new EmailStringListView(ownerDocument, model);
@@ -40,13 +21,15 @@ export class EmailsInputView extends View<EmailStringList> {
 	}
 
 	private updateInputWidth() {
-		if (!inputScrollWidthSupported) {
-			this.input.size = this.input.value.length || 1;
-		} else {
-			this.input.style.width = '';
+		this.input.style.width = '';
 
-			if (this.input.value) {
-				this.input.style.width = this.input.scrollWidth + 'px';
+		if (this.input.value) {
+			if (this.getOwnerDocument().isInputScrollWidthSupported()) {
+				// A magic number is used as a last resort to solve some tiny rounding error in scrollWidth in Chrome
+				this.input.style.width = (this.input.scrollWidth + 1) + 'px';
+			} else {
+				this.inputSizer.textContent = this.input.value;
+				this.input.style.width = this.inputSizer.scrollWidth + 'px';
 			}
 		}
 	}
@@ -71,7 +54,7 @@ export class EmailsInputView extends View<EmailStringList> {
 	}
 
 	private handleInputPasteEvent(event: ClipboardEvent) {
-		this.addEmailsFromString(getClipboardData(event), false);
+		this.addEmailsFromString(this.extractClipboardText(event), false);
 		this.scrollToBottom();
 
 		event.preventDefault();
@@ -102,24 +85,22 @@ export class EmailsInputView extends View<EmailStringList> {
 	}
 
 	private handleDropEvent(event: DragEvent) {
-		this.addEmailsFromString(getDropData(event), false);
+		this.addEmailsFromString(this.extractDroppedText(event), false);
 		this.scrollToBottom();
 
 		event.preventDefault();
 	}
 
-	private handleClickEvent() {
+	private handleClickEvent(event: MouseEvent) {
 		if (event.target === this.getHtml()) {
 			this.input.focus();
 		}
 	}
 
 	protected createHtml() {
-		this.input = this.element({
+		this.input = this.createElement({
 			name: 'input',
-			classes: ['emails-input__control'].concat(
-				inputScrollWidthSupported ? ['emails-input__control-scroll'] : []
-			),
+			classes: ['emails-input__control'],
 			listeners: {
 				blur: () => this.handleInputBlurEvent(),
 				paste: event => this.handleInputPasteEvent(event),
@@ -128,20 +109,24 @@ export class EmailsInputView extends View<EmailStringList> {
 				input: () => this.handleInputTextInputEvent()
 			}
 		});
+		this.inputSizer = this.createElement({
+			name: 'span',
+			classes: ['emails-input__control-sizer']
+		});
 
-		if (!inputScrollWidthSupported) {
-			this.input.size = 1;
-		}
-
-		return this.element({
+		return this.createElement({
 			name: 'div',
 			classes: ['emails-input'],
-			children: [this.emailStringListView.create().getHtml(), this.input],
+			children: [
+				this.emailStringListView.create().getHtml(),
+				this.inputSizer,
+				this.input
+			],
 			listeners: {
 				dragenter: event => this.handleDragEvent(event),
 				dragover: event => this.handleDragEvent(event),
 				drop: event => this.handleDropEvent(event),
-				click: () => this.handleClickEvent()
+				click: event => this.handleClickEvent(event)
 			}
 		});
 	}
