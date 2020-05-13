@@ -90,7 +90,7 @@ export class EmailsInputView extends View<EmailStringList> {
 		event.preventDefault();
 	}
 
-	private handleClickEvent() {
+	private handleClickEvent(event: MouseEvent) {
 		if (event.target === this.getHtml()) {
 			this.input.focus();
 		}
@@ -125,7 +125,7 @@ export class EmailsInputView extends View<EmailStringList> {
 				dragenter: event => this.handleDragEvent(event),
 				dragover: event => this.handleDragEvent(event),
 				drop: event => this.handleDropEvent(event),
-				click: () => this.handleClickEvent()
+				click: event => this.handleClickEvent(event)
 			}
 		});
 	}
