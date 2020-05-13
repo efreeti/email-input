@@ -1,32 +1,33 @@
 import {View} from '@/view/View';
+import {ViewDocument} from "@/view/ViewDocument";
 import {EmailString} from '@/model/EmailString';
 import {EmailStringList} from '@/model/EmailStringList';
 import '@/view/EmailStringListView.scss';
 
 export class EmailStringListView extends View<EmailStringList> {
-	constructor(ownerDocument: Document, emails: EmailStringList) {
+	constructor(ownerDocument: ViewDocument, emails: EmailStringList) {
 		super(ownerDocument, emails);
 	}
 
 	private createEmailHtml(email: EmailString) {
-		return this.element({
+		return this.createElement({
 			name: 'span',
 			classes: [
 				'email-string-list__email-block',
 				`email-string-list__email-block-${email.isValid() ? 'valid' : 'invalid'}`
 			],
 			children: [
-				this.element({
+				this.createElement({
 					name: 'span',
 					classes: ['email-string-list__email-label'],
 					text: email.value
 				}),
-				this.element({
+				this.createElement({
 					name: 'span',
 					classes: ['email-string-list__email-remove-button'],
 					text: '×',
 					listeners: {
-						'click': event => this.getModel().removeEmail(email)
+						'click': () => this.getModel().removeEmail(email)
 					}
 				})
 			]
@@ -34,7 +35,7 @@ export class EmailStringListView extends View<EmailStringList> {
 	}
 
 	protected createHtml() {
-		return this.element({
+		return this.createElement({
 			name: 'span',
 			classes: ['email-string-list']
 		});

@@ -1,3 +1,4 @@
+import {ViewDocument} from '@/view/ViewDocument';
 import {EmailString} from '@/model/EmailString';
 import {EmailStringList} from '@/model/EmailStringList';
 import {EmailsInputView} from '@/view/EmailsInputView';
@@ -10,7 +11,7 @@ const jane = new EmailString('jane@doe.com');
 describe('EmailsInputView', () => {
 	describe('EmailsInputView::create', () => {
 		it('it should create initial markup properly', () => {
-			const view = new EmailsInputView(document, new EmailStringList([bohdan, invalid])).create();
+			const view = new EmailsInputView(new ViewDocument(document), new EmailStringList([bohdan, invalid])).create();
 
 			expect(view.html.querySelector('.emails-input__control')).not.toBeNull();
 
@@ -27,7 +28,7 @@ describe('EmailsInputView', () => {
 	describe('EmailsInputView::update', () => {
 		it('it should update values properly', () => {
 			const emailStringList = new EmailStringList([bohdan, invalid]);
-			const view = new EmailsInputView(document, emailStringList).create();
+			const view = new EmailsInputView(new ViewDocument(document), emailStringList).create();
 
 			emailStringList.addEmails([john, jane]);
 			emailStringList.removeEmail(bohdan);
@@ -47,7 +48,7 @@ describe('EmailsInputView', () => {
 	describe('EmailsInputView addition events', () => {
 		it('it should add items on blur', () => {
 			const emailStringList = new EmailStringList([bohdan]);
-			const view = new EmailsInputView(document, emailStringList).create();
+			const view = new EmailsInputView(new ViewDocument(document), emailStringList).create();
 
 			let input = view.html.querySelector('input');
 			input.value = ' \njohn@doe.com \t';
@@ -61,7 +62,7 @@ describe('EmailsInputView', () => {
 
 		it('it should add items on pressing "Enter"', () => {
 			const emailStringList = new EmailStringList([bohdan]);
-			const view = new EmailsInputView(document, emailStringList).create();
+			const view = new EmailsInputView(new ViewDocument(document), emailStringList).create();
 
 			let input = view.html.querySelector('input');
 			input.value = ' \njohn@doe.com \t';
@@ -77,7 +78,7 @@ describe('EmailsInputView', () => {
 
 		it('it should add items on typing "," at the end', () => {
 			const emailStringList = new EmailStringList([bohdan]);
-			const view = new EmailsInputView(document, emailStringList).create();
+			const view = new EmailsInputView(new ViewDocument(document), emailStringList).create();
 
 			let input = view.html.querySelector('input');
 			input.value = ' \n john@doe.com \t,';
@@ -93,7 +94,7 @@ describe('EmailsInputView', () => {
 
 		it('it should add items on typing "," in the middle', () => {
 			const emailStringList = new EmailStringList([bohdan]);
-			const view = new EmailsInputView(document, emailStringList).create();
+			const view = new EmailsInputView(new ViewDocument(document), emailStringList).create();
 
 			let input = view.html.querySelector('input');
 			input.value = ' \t john@doe.com \n,\n\t jane@doe.com	';
@@ -109,7 +110,7 @@ describe('EmailsInputView', () => {
 
 		it('it should add items on paste', () => {
 			const emailStringList = new EmailStringList([bohdan]);
-			const view = new EmailsInputView(document, emailStringList).create();
+			const view = new EmailsInputView(new ViewDocument(document), emailStringList).create();
 
 			let input = view.html.querySelector('input');
 			input.value = ' \t invalid.com	';
@@ -134,7 +135,7 @@ describe('EmailsInputView', () => {
 
 		it('it should add items on drop', () => {
 			const emailStringList = new EmailStringList([bohdan]);
-			const view = new EmailsInputView(document, emailStringList).create();
+			const view = new EmailsInputView(new ViewDocument(document), emailStringList).create();
 
 			let input = view.html.querySelector('input');
 			input.value = ' \t invalid.com	';

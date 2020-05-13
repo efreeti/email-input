@@ -13,12 +13,23 @@
 	vertical-align: middle;
 	border: none;
 	outline: none;
+	width: 1em;
 	max-width: 100%;
+	padding: 0px;
+}
 
+.emails-input__control::-ms-clear {
+	display: none;
+}
+
+.emails-input__control,
+.emails-input__control-sizer {
 	font-family: Open Sans;
 	font-size: 14px;
 }
 
-.emails-input__control-scroll {
-	width: 1em;
+.emails-input__control-sizer {
+	position: absolute;
+	overflow: hidden;
+	width: 0px;
 }

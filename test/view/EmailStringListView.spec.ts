@@ -1,3 +1,4 @@
+import {ViewDocument} from '@/view/ViewDocument';
 import {EmailString} from '@/model/EmailString';
 import {EmailStringList} from '@/model/EmailStringList';
 import {EmailStringListView} from '@/view/EmailStringListView';
@@ -10,7 +11,7 @@ const jane = new EmailString('jane@doe.com');
 describe('EmailStringListView', () => {
 	describe('EmailStringListView::create', () => {
 		it('it should create initial values properly', () => {
-			const view = new EmailStringListView(document, new EmailStringList([bohdan, invalid])).create();
+			const view = new EmailStringListView(new ViewDocument(document), new EmailStringList([bohdan, invalid])).create();
 
 			const items = view.html.querySelectorAll('.email-string-list__email-block');
 
@@ -25,7 +26,7 @@ describe('EmailStringListView', () => {
 	describe('EmailStringListView::update', () => {
 		it('it should update values properly', () => {
 			const emailStringList = new EmailStringList([bohdan, invalid]);
-			const view = new EmailStringListView(document, emailStringList).create();
+			const view = new EmailStringListView(new ViewDocument(document), emailStringList).create();
 
 			emailStringList.addEmails([john, jane]);
 			emailStringList.removeEmail(bohdan);
@@ -44,7 +45,7 @@ describe('EmailStringListView', () => {
 
 	describe('EmailStringListView click to remove', () => {
 		it('it should remove items properly', () => {
-			const view = new EmailStringListView(document, new EmailStringList([bohdan, invalid, john])).create();
+			const view = new EmailStringListView(new ViewDocument(document), new EmailStringList([bohdan, invalid, john])).create();
 
 			let items = view.html.querySelectorAll('.email-string-list__email-block');
 			items.item(0).querySelector('.email-string-list__email-remove-button').dispatchEvent(
