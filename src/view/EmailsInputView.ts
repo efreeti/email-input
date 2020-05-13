@@ -1,14 +1,17 @@
+import {detectInputScrollWidthSupport} from "@/view/support";
 import {View} from '@/view/View';
 import {EmailString} from '@/model/EmailString';
 import {EmailStringList} from '@/model/EmailStringList';
 import {EmailStringListView} from '@/view/EmailStringListView';
 import '@/view/EmailsInputView.scss';
 
+const inputScrollWidthSupported = detectInputScrollWidthSupport(document);
+
 function getClipboardData(event: ClipboardEvent) {
 	if (event.clipboardData) {
 		return event.clipboardData.getData('text/plain');
 	} else {
-		return (<any>window).clipboardData.getData('Text');
+		return (window as any).clipboardData.getData('Text');
 	}
 }
 
@@ -37,12 +40,14 @@ export class EmailsInputView extends View<EmailStringList> {
 	}
 
 	private updateInputWidth() {
-		if (this.input.value) {
-			if (this.input.scrollWidth > this.input.offsetWidth) {
-				this.input.style.width = this.input.scrollWidth + 'px';
-			}
+		if (!inputScrollWidthSupported) {
+			this.input.size = this.input.value.length || 1;
 		} else {
 			this.input.style.width = '';
+
+			if (this.input.value) {
+				this.input.style.width = this.input.scrollWidth + 'px';
+			}
 		}
 	}
 
@@ -112,7 +117,9 @@ export class EmailsInputView extends View<EmailStringList> {
 	protected createHtml() {
 		this.input = this.element({
 			name: 'input',
-			classes: ['emails-input__control'],
+			classes: ['emails-input__control'].concat(
+				inputScrollWidthSupported ? ['emails-input__control-scroll'] : []
+			),
 			listeners: {
 				blur: () => this.handleInputBlurEvent(),
 				paste: event => this.handleInputPasteEvent(event),
@@ -121,6 +128,10 @@ export class EmailsInputView extends View<EmailStringList> {
 				input: () => this.handleInputTextInputEvent()
 			}
 		});
+
+		if (!inputScrollWidthSupported) {
+			this.input.size = 1;
+		}
 
 		return this.element({
 			name: 'div',
