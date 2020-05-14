@@ -29,7 +29,8 @@ export class EmailsInputView extends View<EmailStringList> {
 				this.input.style.width = (this.input.scrollWidth + 1) + 'px';
 			} else {
 				this.inputSizer.textContent = this.input.value;
-				this.input.style.width = this.inputSizer.scrollWidth + 'px';
+				// Another magic number is used to solve same issue with IE
+				this.input.style.width = (this.inputSizer.scrollWidth + 1) + 'px';
 			}
 		}
 	}
